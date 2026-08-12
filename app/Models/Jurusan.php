@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+class Jurusan extends Model
+{
+    protected $fillable = ['kode_jurusan', 'nama_jurusan'];
+
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function kelas(): HasMany
+    {
+        return $this->hasMany(Kelas::class);
+    }
+}
