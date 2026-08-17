@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\KoordinatorBk;
 
 use App\Http\Controllers\Controller;
 use App\Models\JenisPelanggaran;
@@ -11,12 +11,12 @@ class JenisPelanggaranController extends Controller
     public function index()
     {
         $pelanggarans = JenisPelanggaran::orderBy('kategori', 'asc')->get();
-        return view('admin.jenis-pelanggaran.index', compact('pelanggarans'));
+        return view('koordinator-bk.jenis-pelanggaran.index', compact('pelanggarans'));
     }
 
     public function create()
     {
-        return view('admin.jenis-pelanggaran.create');
+        return view('koordinator-bk.jenis-pelanggaran.create');
     }
 
     public function store(Request $request)
@@ -28,13 +28,13 @@ class JenisPelanggaranController extends Controller
         ]);
 
         JenisPelanggaran::create($request->all());
-        return redirect()->route('admin.jenis-pelanggaran.index')->with('success', 'Jenis pelanggaran berhasil ditambahkan.');
+        return redirect()->route('koordinator-bk.jenis-pelanggaran.index')->with('success', 'Jenis pelanggaran berhasil ditambahkan.');
     }
 
     public function edit($id)
     {
         $pelanggaran = JenisPelanggaran::findOrFail($id);
-        return view('admin.jenis-pelanggaran.edit', compact('pelanggaran'));
+        return view('koordinator-bk.jenis-pelanggaran.edit', compact('pelanggaran'));
     }
 
     public function update(Request $request, $id)
@@ -48,12 +48,12 @@ class JenisPelanggaranController extends Controller
         $pelanggaran = JenisPelanggaran::findOrFail($id);
         $pelanggaran->update($request->all());
         
-        return redirect()->route('admin.jenis-pelanggaran.index')->with('success', 'Jenis pelanggaran berhasil diperbarui.');
+        return redirect()->route('koordinator-bk.jenis-pelanggaran.index')->with('success', 'Jenis pelanggaran berhasil diperbarui.');
     }
 
     public function destroy($id)
     {
         JenisPelanggaran::findOrFail($id)->delete();
-        return redirect()->route('admin.jenis-pelanggaran.index')->with('success', 'Jenis pelanggaran berhasil dihapus.');
+        return redirect()->route('koordinator-bk.jenis-pelanggaran.index')->with('success', 'Jenis pelanggaran berhasil dihapus.');
     }
 }

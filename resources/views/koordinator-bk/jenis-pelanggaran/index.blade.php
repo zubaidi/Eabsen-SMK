@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="card-title">Data Master Jenis Pelanggaran</h5>
-            <a href="{{ route('admin.jenis-pelanggaran.create') }}" class="btn btn-primary btn-sm">Tambah Pelanggaran</a>
+            <a href="{{ route('koordinator-bk.jenis-pelanggaran.create') }}" class="btn btn-primary btn-sm">Tambah Pelanggaran</a>
         </div>
         <div class="card-body">
             @if(session('success'))
@@ -35,8 +35,8 @@
                         </td>
                         <td>{{ $p->poin }}</td>
                         <td>
-                            <a href="{{ route('admin.jenis-pelanggaran.edit', $p->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('admin.jenis-pelanggaran.destroy', $p->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin mau hapus data ini?')">
+                            <a href="{{ route('koordinator-bk.jenis-pelanggaran.edit', $p->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ route('koordinator-bk.jenis-pelanggaran.destroy', $p->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin mau hapus data ini?')">
                                 @csrf @method('DELETE')
                                 <button class="btn btn-danger btn-sm">Hapus</button>
                             </form>

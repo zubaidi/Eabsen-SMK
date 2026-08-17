@@ -37,10 +37,16 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('kelas', \App\Http\Controllers\Admin\KelasController::class);
     // Rute Master Data Kelas
     Route::resource('kelas', \App\Http\Controllers\Admin\KelasController::class);
+    // Rute Tambahan Import & Template Siswa
+    Route::get('siswa/template', [\App\Http\Controllers\Admin\SiswaController::class, 'downloadTemplate'])->name('siswa.download-template');
+    Route::post('siswa/import', [\App\Http\Controllers\Admin\SiswaController::class, 'import'])->name('siswa.import');
     // Rute Master Data Siswa
     Route::resource('siswa', \App\Http\Controllers\Admin\SiswaController::class);
-    // Rute Master Data Guru
-    Route::resource('guru', \App\Http\Controllers\Admin\GuruController::class);
+    // Rute Master Data Siswa
+    Route::resource('siswa', \App\Http\Controllers\Admin\SiswaController::class);
+    // Rute Import & Template Guru
+    Route::get('guru/template', [\App\Http\Controllers\Admin\GuruController::class, 'downloadTemplate'])->name('guru.download-template');
+    Route::post('guru/import', [\App\Http\Controllers\Admin\GuruController::class, 'import'])->name('guru.import');
     // Rute Master Data Guru
     Route::resource('guru', \App\Http\Controllers\Admin\GuruController::class);
     // Rute Master Penugasan Guru (Baru)
@@ -55,14 +61,35 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
 // --- GRUP RUTE GURU ---
 Route::middleware(['auth', 'role:guru'])->prefix('guru')->name('guru.')->group(function () {
-    // Nanti rute input presensi masuk ke sini
+    // Rute input presensi masuk ke sini
+    Route::get('presensi', [\App\Http\Controllers\Guru\PresensiController::class, 'index'])->name('presensi.index');
+    
+    // Rute Presensi (Absensi) Guru
+    Route::get('presensi/create', [\App\Http\Controllers\Guru\PresensiController::class, 'create'])->name('presensi.create');
+    Route::post('presensi/store', [\App\Http\Controllers\Guru\PresensiController::class, 'store'])->name('presensi.store');
+    // Rute AJAX untuk menyedot data siswa
+    Route::get('presensi/get-siswa/{kelas_id}', [\App\Http\Controllers\Guru\PresensiController::class, 'getSiswa'])->name('presensi.get-siswa');
+    Route::get('presensi/{id}', [\App\Http\Controllers\Guru\PresensiController::class, 'show'])->name('presensi.show');
 
+});
+// --- GRUP RUTE KOORDINATOR BK ---
+Route::middleware(['auth', 'role:koordinator_bk'])->prefix('koordinator-bk')->name('koordinator-bk.')->group(function () {
+
+    // Rute Master Data Jenis Pelanggaran
+    Route::resource('jenis-pelanggaran', \App\Http\Controllers\KoordinatorBk\JenisPelanggaranController::class);
 
 });
 
 // --- GRUP RUTE BK ---
 Route::middleware(['auth', 'role:bk'])->prefix('bk')->name('bk.')->group(function () {
     // Nanti rute catat pelanggaran masuk ke sini
+    
+    // Rute Dashboard BK (yang barusan kita benerin)
+    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'bk'])->name('dashboard');
+
+    // Rute Paket Komplit CRUD Pelanggaran
+    Route::resource('pelanggaran', \App\Http\Controllers\Bk\PelanggaranController::class);
+    
 });
 
 // --- GRUP RUTE WAKA KESISWAAN ---

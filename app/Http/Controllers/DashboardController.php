@@ -24,6 +24,10 @@ class DashboardController extends Controller
                 return view('waka.dashboard', compact('user'));
             case 'kepala_sekolah':
                 return view('kepsek.dashboard', compact('user'));
+                case 'bk':
+                return view('bk.dashboard');
+            case 'koordinator_bk': // <--- Tambahkan baris ini
+                return view('koordinator-bk.dashboard'); // <--- Tambahkan baris ini
             default:
                 abort(403, 'Role tidak dikenali.');
         }

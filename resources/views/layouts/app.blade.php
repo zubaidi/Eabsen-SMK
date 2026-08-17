@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('mazer/compiled/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('mazer/compiled/css/app-dark.css') }}">
     <link rel="stylesheet" href="{{ asset('mazer/compiled/css/iconly.css') }}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
     <script src="{{ asset('mazer/static/js/initTheme.js') }}"></script>
@@ -90,5 +91,6 @@
     <script src="{{ asset('mazer/static/js/components/dark.js') }}"></script>
     <script src="{{ asset('mazer/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('mazer/compiled/js/app.js') }}"></script>
+    @stack('scripts')
 </body>
 </html>
